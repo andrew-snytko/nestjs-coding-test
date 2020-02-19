@@ -1,0 +1,52 @@
+version: '3.5'
+
+services:
+    postgres:
+        container_name: nestjs-coding-test-postgres
+        image: postgres:10
+        environment:
+            POSTGRES_DB: nestjs-coding-test
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 12345
+            PGDATA: /data/postgres
+        volumes:
+            - nestjs-coding-test-postgres-data:/data/postgres
+        ports:
+            - '5433:5432'
+        networks:
+            - nestjs-coding-test-postgres
+        restart: unless-stopped
+
+    app:
+        container_name: nestjs-coding-test-app
+        build: .
+        restart: always
+        environment:
+            - NODE_ENV=development
+            - APP_PORT=3000
+            - DB_HOST=postgres
+            - DB_PORT=5432
+            - DB_USERNAME=postgres
+            - DB_PASSWORD=12345
+            - DB_NAME=nestjs-coding-test
+        ports:
+            - '3000:3000'
+        volumes:
+            - nestjs-coding-test-app:/usr/src/app/
+            - nestjs-coding-test-node_modules:/usr/src/app/node_modules
+        depends_on:
+            - postgres
+        links:
+            - postgres
+        networks:
+            - nestjs-coding-test-postgres
+        command: npm start
+
+networks:
+    nestjs-coding-test-postgres:
+        driver: bridge
+
+volumes:
+    nestjs-coding-test-postgres-data:
+    nestjs-coding-test-app:
+    nestjs-coding-test-node_modules:

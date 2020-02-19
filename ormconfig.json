@@ -1,0 +1,31 @@
+[
+    {
+        "cli": {
+            "entities": [
+                "dist/**/*.entity{.ts,.js}"
+            ],
+            "migrations": [
+                "dist/**/migrations/*{.ts,.js}"
+            ],
+            "migrationsDir": "src/migrations"
+        },
+        "name": "default",
+        "type": "postgres",
+        "host": "localhost",
+        "port": 5432,
+        "username": "postgres",
+        "password": "12345",
+        "database": "nestjs-coding-test",
+        "synchronize": false,
+        "entities": [
+            "dist/**/*.entity{.ts,.js}"
+        ],
+        "migrations": [
+            "dist/**/migrations/*{.ts,.js}"
+        ],
+        "logging": [
+            "error",
+            "migration"
+        ]
+    }
+]

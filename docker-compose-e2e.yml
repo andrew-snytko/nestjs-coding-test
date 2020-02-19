@@ -1,0 +1,48 @@
+version: '3.5'
+
+services:
+    postgres-e2e:
+        container_name: nestjs-coding-test-postgres-e2e
+        image: postgres:10
+        environment:
+            POSTGRES_DB: nestjs-coding-test-e2e
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: 12345
+            PGDATA: /data/postgres
+        volumes:
+            - nestjs-coding-test-postgres-data-e2e:/data/postgres
+        networks:
+            - nestjs-coding-test-postgres-e2e
+        restart: unless-stopped
+
+    app-e2e:
+        container_name: nestjs-coding-test-app-e2e
+        build: .
+        environment:
+            - NODE_ENV=test
+            - APP_PORT=3000
+            - DB_HOST=postgres-e2e
+            - DB_PORT=5432
+            - DB_USERNAME=postgres
+            - DB_PASSWORD=12345
+            - DB_NAME=nestjs-coding-test-e2e
+            - DB_SYNCHRONIZE=true
+        volumes:
+            - nestjs-coding-test-app-e2e:/usr/src/app/
+            - nestjs-coding-test-node_modules-e2e:/usr/src/app/node_modules
+        depends_on:
+            - postgres-e2e
+        links:
+            - postgres-e2e
+        networks:
+            - nestjs-coding-test-postgres-e2e
+        command: bash -c "npm run build && npm run test:e2e"
+
+networks:
+    nestjs-coding-test-postgres-e2e:
+        driver: bridge
+
+volumes:
+    nestjs-coding-test-postgres-data-e2e:
+    nestjs-coding-test-app-e2e:
+    nestjs-coding-test-node_modules-e2e:

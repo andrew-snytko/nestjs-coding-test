@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es2018",
+        "lib": ["es2018"],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "esModuleInterop": true,
+        "strictPropertyInitialization": false,
+        "resolveJsonModule": true
+    },
+    "compileOnSave": true,
+    "include": ["src", "scripts"],
+    "exclude": ["**/*spec.ts"]
+}
