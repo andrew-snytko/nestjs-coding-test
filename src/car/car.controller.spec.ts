@@ -45,7 +45,9 @@ describe('CarController', () => {
 
     describe('findAll', () => {
         it('should return array of cars', async () => {
-            const carsMock = Array(5).map(() => getCarMock({}));
+            const carsMock = Array(5)
+                .fill(null)
+                .map(() => getCarMock({}));
             const expectedResult = carsMock.map(car => CarService.getDto(car));
 
             jest.spyOn(carService, 'findAll').mockImplementationOnce(

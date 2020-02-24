@@ -51,7 +51,9 @@ describe('OwnerController', () => {
 
     describe('findAll', () => {
         it('should return array of owners', async () => {
-            const ownersMock = Array(5).map(() => getOwnerMock({}));
+            const ownersMock = Array(5)
+                .fill(null)
+                .map(() => getOwnerMock({}));
             const expectedResult = ownersMock.map(owner =>
                 OwnerService.getDto(owner),
             );

@@ -39,7 +39,9 @@ describe('ManufacturerController', () => {
 
     describe('findAll', () => {
         it('should return array of manufacturers', async () => {
-            const manufacturersMock = Array(5).map(() => getManufacturerMock());
+            const manufacturersMock = Array(5)
+                .fill(null)
+                .map(() => getManufacturerMock());
             const expectedResult = manufacturersMock.map(manufacturer =>
                 ManufacturerService.getDto(manufacturer),
             );

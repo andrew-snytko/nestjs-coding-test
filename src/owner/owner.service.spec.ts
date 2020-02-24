@@ -55,7 +55,9 @@ describe('OwnerService', () => {
 
     describe('findAll', () => {
         it('should return array of owners', async () => {
-            const expectedResult = Array(5).map(() => getOwnerMock({}));
+            const expectedResult = Array(5)
+                .fill(null)
+                .map(() => getOwnerMock({}));
 
             jest.spyOn(ownerRepo, 'find').mockImplementationOnce(
                 async () => expectedResult,

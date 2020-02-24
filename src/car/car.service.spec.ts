@@ -53,7 +53,9 @@ describe('CarService', () => {
 
     describe('findAll', () => {
         it('should return array of cars', async () => {
-            const expectedResult = Array(5).map(() => getCarMock({}));
+            const expectedResult = Array(5)
+                .fill(null)
+                .map(() => getCarMock({}));
 
             jest.spyOn(carRepo, 'find').mockImplementationOnce(
                 async () => expectedResult,

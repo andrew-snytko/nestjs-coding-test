@@ -40,7 +40,9 @@ describe('ManufacturerService', () => {
 
     describe('findAll', () => {
         it('should return array of manufacturers', async () => {
-            const expectedResult = Array(5).map(() => getManufacturerMock());
+            const expectedResult = Array(5)
+                .fill(null)
+                .map(() => getManufacturerMock());
 
             jest.spyOn(manufacturerRepo, 'find').mockImplementationOnce(
                 async () => expectedResult,
